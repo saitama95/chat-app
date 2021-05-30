@@ -1,0 +1,73 @@
+<script>
+    class BinaryHeap {
+        constructor() {
+            this.arr=[];
+        }
+        insert(value) {
+            this.arr.push(value);
+            let index=this.arr.length-1;
+            while(index>0) {
+                let parentIndex=Math.floor((index-1)/2);
+                let parentElement=this.arr[parentIndex];
+                if(parentElement >= value) { break }
+                this.arr[parentIndex]=value;
+                this.arr[index]=parentElement;
+                index=parentIndex;
+            }
+            return this.arr[index];
+        }
+        remove() {
+            const max=this.arr[0];
+            const end=this.arr.pop();
+            if(this.arr.length > 0) {
+                this.arr[0]=end;
+                this.sinkDown();
+            }
+            return max;
+        }
+        sinkDown() {
+            let index=0;
+            let length = this.arr.length;
+            let element= this.arr[index];
+            while(true) { 
+                let leftChildIndex=2*index+1;
+                let rightChildIndex=2*index+2;
+                let leftChild,rightChild;
+                let swap=null;
+                if(leftChildIndex<length){
+                    leftChild=this.arr[leftChildIndex];
+                    if(leftChild > element ){
+                        swap=leftChildIndex
+                    }
+                }
+                if(rightChildIndex < length) {
+                    rightChild=this.arr[rightChildIndex];
+                    if(
+                        swap===null && rightChild > element ||
+                        swap!==null && rightChild > leftChild
+                    )
+                    {
+                        swap = rightChildIndex;
+                    }
+                }
+                if(swap ===null) { break }
+                this.arr[index]= this.arr[swap];
+                this.arr[swap] = element;
+                index=swap;
+            }
+        }
+    }
+    let heap = new BinaryHeap();
+    heap.insert(39)
+    heap.insert(33)
+    heap.insert(27)
+    heap.insert(18)
+    heap.insert(12)
+    heap.insert(8)
+    heap.insert(10)
+    heap.insert(15)
+    heap.insert(19)
+    heap.insert(100)
+    heap.insert(99)
+    heap.insert(109)
+</script>

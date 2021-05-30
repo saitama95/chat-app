@@ -1,0 +1,77 @@
+<script>
+    class Node {
+        constructor(val,priority) {
+            this.value=val;
+            this.priority=priority;
+        }
+    }
+    class PriorityQueue {
+        constructor (){
+            this.arr=[];
+        }
+        insert(val,priority) {
+            let newNode= new Node(val,priority);
+            this.arr.push(newNode);
+            let index=this.arr.length-1;
+            while(index>0) {
+                let parentIndex = Math.floor((index-1)/2);
+                let parentElement=this.arr[parentIndex];
+                if(parentElement.priority > newNode.priority) {
+                    this.arr[parentIndex] = newNode;
+                    this.arr[index] = parentElement;
+                    index=parentIndex;
+                }else {
+                    break;
+                }
+            }
+        }
+        remove() {
+            let min = this.arr[0];
+            let end =this.arr.pop();
+            if(this.arr.length > 0) {
+                this.arr[0] = end;
+                console.log(length)
+                this.sinkdown();   
+            }
+            return min;
+        }
+        sinkdown() {
+            let index=0;
+            let element=this.arr[0];
+            let size = this.arr.length;
+            while(true){
+                let fci=2*index+1;
+                let sci=2*index+2;
+                let leftChild,rightChild,swap=null;
+                if(fci < size){
+                    leftChild = this.arr[fci];
+                    if(leftChild.priority < element.priority) {
+                        swap=fci;
+                    }
+                }
+                if(sci < size){
+                    rightChild = this.arr[sci];
+                    if( (rightChild.priority < element.priority && swap===null) ||
+                        (rightChild.priority < leftChild.priority && swap!==null)
+                    ) {
+                        swap = sci;
+                    }
+                }
+                if(swap === null){
+                    break
+                }
+                let temp = this.arr[swap];
+                this.arr[swap] = element;
+                this.arr[index] = temp;
+                index=swap;
+                
+            }
+        }
+    }
+    let list = new PriorityQueue();
+    list.insert('corona virus',3);
+    list.insert('lowfever',21);
+    list.insert('gun shot',11);
+    list.insert('gun shot on head',1);
+    list.insert('cancer',12);
+</script>

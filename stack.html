@@ -1,0 +1,54 @@
+<script>
+    class Node{
+    constructor(value){
+        this.value=value
+        this.next=null;
+    }
+}
+class Stack{
+    constructor(){
+        this.first=null;
+        this.last=null;
+        this.size=0;
+    }
+    push(val){
+        let newNode=new Node(val)
+        if(!this.first){
+            this.first=newNode;
+            this.last=newNode;
+            this.size++;
+        }else{
+            newNode.next=this.first;
+            this.first=newNode;
+            this.size++;
+        }
+        return this;
+    }
+    pop(){
+        if(!this.first) return null;
+        let temp=this.first;
+        if(this.first===this.last){
+            this.last=null;
+        }
+        this.first=temp.next;
+        temp.next=null;
+        this.size--;
+        return temp.value;
+         
+    }
+    print(){
+        let arr=[];
+        let store=this.first;
+        while(store){
+            arr.push(store.value)
+            store=store.next;
+        }
+        console.log(arr);
+    }
+}
+let list=new Stack();
+list.push(12);
+list.push(10);
+list.push(20);
+list.push(60);
+</script>

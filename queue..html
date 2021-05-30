@@ -1,0 +1,47 @@
+<script>
+    class Node{
+    constructor(value){
+        this.value=value;
+        this.next=null;
+    }
+}
+class Queue{
+    constructor(){
+        this.first=null;
+        this.last=null;
+        this.size=0;
+    }
+    insert(val){
+        let newNode=new Node(val);
+        if(!this.size){
+            this.first=newNode;
+            this.last=newNode
+        }else{
+            this.last.next=newNode;
+            this.last=newNode;
+        }
+        return ++this.size;
+    }
+    remove(){
+        if(!this.first){ return null }
+        let temp=this.first;
+        if(this.first === this.last){
+            this.last=null;
+        }
+        this.first=this.first.next;
+        temp.next=null;
+        return temp.value;
+    }
+    print(){
+        let arr=[];
+        let store=this.first;
+        while(store){
+            arr.push(store.value)
+            store=store.next;
+        }
+        console.log(arr)
+    }
+}
+let list=new Queue();
+
+</script>

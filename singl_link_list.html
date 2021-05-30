@@ -1,0 +1,155 @@
+<script>
+	class Node{
+    constructor(val){
+        this.val=val;
+        this.next=null;
+    }
+}
+class Single{
+	constructor(){
+		this.head=null;
+		this.tail=null;
+		this.length=0;
+	}
+	push(val){
+	   let newNode=new Node(val)
+	   if(!this.head){
+	   	this.head=newNode;
+	   	this.tail=this.head;
+	   }else{
+          this.tail.next=newNode;
+          this.tail=newNode;
+	   }
+	   this.length++;
+	   return this;
+	}
+	pop(){
+		if(!this.head || !this.length){
+			return undefined;
+		}else{
+			let temp=this.head;
+			let prenode=temp;
+			while(temp.next){
+				 prenode=temp;
+			     temp=temp.next;
+			}
+			this.tail=prenode;
+			this.tail.next=null;
+			this.length--;
+			return this;
+		}
+	}
+	popOnhead(){
+		if(!this.head || !this.length){
+			return undefined;
+		}else{
+			let temp=this.head;
+			this.head=temp.next;
+			temp.next=null;
+			this.length--;
+			return this;
+		}
+	}
+	Unshifting(val){
+		let newNode=new Node(val);
+		if(!this.head){
+			this.head=newNode;
+			this.tail=this.head;
+			this.length++;
+			return this;
+		}else{
+		newNode.next=this.head;
+		this.head=newNode;
+		this.length++;
+		return this;
+		}
+	}
+	get(index){
+		if(index<0 || index>=this.length){
+			return 'check index or list is empty';
+		}else{
+			let i=0;
+			let temp=this.head;
+			while(i<index){
+			   temp=temp.next;
+			   i++; 
+			}
+			return temp;
+		}
+	}
+	onAddIndex(index,val){
+		if(index<0 || index>=this.length){
+			return 'check index';
+		}else{
+			let i=0;
+			let temp=this.head;
+			let prevnode;
+			while(i<index){
+			   prevnode=temp;
+			   temp=temp.next;
+			   i++; 
+			}
+			let newNode=new Node(val);
+			newNode.next=temp;
+			prevnode.next=newNode;
+			this.length++;
+			return this;
+		}
+	}
+	onAddPosition(pos,val){
+		if(pos<0 || pos>this.length) { return undefined }
+		if(pos===this.length) { this.push(val) }
+		if(pos===0){ return Unshifting(val) }
+
+	    let newNode= new Node(val);
+	    let prenode=this.get(pos-1);
+	    let temp=prenode.next;
+	    
+	    prenode.next=newNode;
+	    newNode.next=temp;
+	    this.length++;
+		return this;
+	}
+	onDeleteIndex(index){
+		if(index<0 ||index>=this.length){ return undefined }
+		if(index===(this.length-1)) { return this.pop() }
+		if(index===0){ return this.popOnhead()}
+		let temp=this.get(index-1);
+		let prevnode=temp.next;
+		temp.next=prevnode.next;
+		prevnode.next=null;
+		this.length--;
+		return this;
+	}
+	reverselist(){
+	    let node=this.head;
+	    this.head=this.tail
+	    this.tail=node;
+	    let prev=null;
+	    let next;
+	    for(let i=0;i<this.length;i++){
+	    	next=node.next;
+	    	node.next=prev;
+	    	prev=node;
+	    	node=next;
+	    }
+	    return this;
+	}
+	print(){
+		let arr=[];
+		let current=this.head;
+		while(current){
+			arr.push(current.val)
+			current=current.next;
+		}
+		console.log(arr);
+	}
+}
+var list=new Single()
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+list.push(6);
+</script>
