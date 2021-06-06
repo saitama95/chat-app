@@ -1,0 +1,26 @@
+<script>
+    //  function binarySearch(arr,value,low,end) {
+    //     let mid = Math.floor((low+end)/2);
+    //     if(arr[mid]<value) binarySearch(arr,value,mid+1,end);
+    // else if(arr[mid]>value)binarySearch(arr,value,low,mid-1);
+    //     return arr[mid]===value?console.log(mid):console.log(false)
+    // }
+    // let arr=[12,23,45,56,67,89,90,99];
+    // let value = 00;
+    // let low=0;
+    // let end = arr.length-1;
+    // binarySearch(arr,value,low,end);
+    
+    function binarySearch(arr,value) {
+        let low = 0;
+        let end = arr.length-1;
+        let mid = Math.floor((low+end)/2);
+        while(arr[mid] !== value && low <= end){
+            if(arr[mid] < value) low = mid+1;
+            else end = mid - 1;
+            mid = Math.floor((low+end)/2);
+        }
+        return arr[mid] === value ? mid : false
+    }
+    binarySearch([12,23,45,56,67,89,90,99],45);
+</script>

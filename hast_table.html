@@ -1,0 +1,72 @@
+<script>
+    class HashTable {
+        constructor(size = 4){
+            this.keyMap = new Array(size);
+        }
+        _hash(key){
+            let total = 0;
+            let prime_num = 31;
+            for(let i=0;i<Math.min(key.length,100);i++) {
+                let char = key[i];
+                let value = char.charCodeAt(0) - 96;
+                total = (total * prime_num + value)% this.keyMap.length;
+            }
+            return total;
+        }
+        set(key,value){
+            let index = this._hash(key);
+            if(!this.keyMap[index]) this.keyMap[index]=[];
+            this.keyMap[index].push([key,value])
+        }
+        get(key){
+            let index = this._hash(key);
+            if(this.keyMap[index]){
+                for(let i=0;i<this.keyMap[index].length;i++){
+                    if(this.keyMap[index][i][0] === key){
+                        return this.keyMap[index][i][1];
+                    }
+                }
+            }
+            return undefined;
+        }
+        value(){
+            let arrayValue = [];
+            for(let i=0;i<this.keyMap.length;i++){
+                    if(this.keyMap[i]){
+                        for(let j=0;j<this.keyMap[i].length;j++){
+                        if(!arrayValue.includes(this.keyMap[i][j][1])){
+                            arrayValue.push(this.keyMap[i][j][1]);
+                        }
+                    }
+                }
+            }
+            return arrayValue;
+        }
+        keys(){
+            let keyarr = [];
+            for(let i=0;i<this.keyMap.length;i++){
+                if(this.keyMap[i]){
+                    for(let j=0;j<this.keyMap[i].length;j++){
+                        if(!keyarr.includes(this.keyMap[i][j][0])){
+                            keyarr.push(this.keyMap[i][j][0])
+                        }
+                    }
+                }
+            }
+            return keyarr;
+        }
+    }
+    let table = new HashTable(5);
+    table.set('yellow','#4yop44');
+    table.set('pink','#4qwer4');
+    table.set('cyan','#445try44');
+    table.set('white','#4sdf44');
+    table.set('black','#4455444');
+    table.set('orange','#432444');
+    table.set('voilet','#4895444');
+    table.set('green','#4895444');
+    table.set('rose','#4895444');
+    table.set('rose','#4895444');
+    table.set('rose','#4895444');
+    table.set('rose','#4895444');
+</script>
