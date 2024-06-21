@@ -1,4 +1,34 @@
 <script>
+   var removeNthFromEnd = function(head, n) {
+    let temp = head;
+    let size=0;
+    while(temp){
+        size++;
+        temp = temp.next;
+    }
+    if(size==1){
+        head=null;
+        return head;
+    }
+    let temp2 = head;
+    let removeIndexpostion = size-n;
+    if(removeIndexpostion==0){
+        head = temp2.next;
+        return head;
+    }
+    let index = 1;
+    while(index<removeIndexpostion){
+        temp2 = temp2.next;
+        index++;
+    }
+    if(n==1){
+        temp2.next = null;
+    }else{
+        let nextnode = temp2.next.next;
+        temp2.next = nextnode;
+    }
+    return head;
+};
    var plusOne = function(digits) {
         let carry = 0;
         let size = digits.length;
