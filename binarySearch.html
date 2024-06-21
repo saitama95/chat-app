@@ -1,4 +1,24 @@
 <script>
+
+   var lengthOfLastWord = function(s) {
+    s = s.toLowerCase();
+    let first = s.length-1;
+    let count = 0;
+    let check=false;
+    for(let i=s.length-1;i>=0;i--){
+        if(s[i]>='a'){
+            if(check==false){
+                first = i;
+                check=true;
+            }
+            count++;
+        }
+        if(check && s[i]==" "){
+            return count;
+        }
+    }
+    return count;
+};
    var removeNthFromEnd = function(head, n) {
     let temp = head;
     let size=0;
